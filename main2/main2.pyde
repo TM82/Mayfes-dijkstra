@@ -28,6 +28,7 @@ def draw():
         update_draw_stations(decided_node)
         if not unsearched_node:
             print_result(start_node,goal_node)
+            draw_result(start_node,goal_node)
             is_start,is_goal = False,False
     
 

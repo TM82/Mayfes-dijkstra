@@ -2,10 +2,11 @@ def draw_rails(unsearched_node):
     for node in unsearched_node:
         for keynode,rail in node.links.items():
             stroke(0,0,0)
-            strokeWeight(2)
+            strokeWeight(1)
             line(node.coordinate[1],800-node.coordinate[0],keynode.coordinate[1],800-keynode.coordinate[0])
             x = (node.coordinate[1]+keynode.coordinate[1])/2
             y = (800-node.coordinate[0]+800-keynode.coordinate[0])/2
+            fill(0)
             text(rail.distance,x,y)
 
 def draw_stations(unsearched_node):
@@ -49,3 +50,14 @@ def print_result(start_node,goal_node):
             print("^  {0}".format(pre_node.links[node].name))
             print(pre_node.name)
             node = pre_node
+
+def draw_result(start_node,goal_node):
+    node = goal_node
+    fill(255,0,0)
+    ellipse(node.coordinate[1],800-node.coordinate[0],40,40)
+    pre_node = goal_node.previous_node
+    while pre_node:
+        fill(255,0,0)
+        ellipse(pre_node.coordinate[1],800-pre_node.coordinate[0],40,40)
+        node = pre_node
+        pre_node = pre_node.previous_node
