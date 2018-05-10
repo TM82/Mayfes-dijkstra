@@ -26,7 +26,6 @@ def draw():
         direct_node = make_direct_node(decided_node,unsearched_node)
         decided_node,unsearched_node = get_min(direct_node,decided_node,unsearched_node)
         update_draw_stations()
-        delay(200)
         if not unsearched_node:
             print_result(start_node,goal_node)
             is_start,is_goal = False,False

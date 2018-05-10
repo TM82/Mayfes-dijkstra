@@ -32,7 +32,7 @@ def make_direct_node(decided_node,unsearched_node):
                 linked_node = relabel(node,linked_node)
                 linked_node.previous_node = node
                 direct_node.append(linked_node)
-                delay(50)
+                # delay(50)
                 stroke(0,0,0)
                 strokeWeight(3)
                 line(node.coordinate[1],800-node.coordinate[0],linked_node.coordinate[1],800-linked_node.coordinate[0])
@@ -62,11 +62,24 @@ def print_result(start_node,goal_node):
     print("start: {0}    goal:{1}".format(start_node.name,goal_node.name))
     print
     print(goal_node.name)
-    print("^")
+    node = goal_node
     pre_node = goal_node.previous_node
-    #compare pre_node.railname to node
-    while pre_node != start_node:
-        print(pre_node.name)
-        print("^")
-        pre_node = pre_node.previous_node
-    print(pre_node.name)
+    pre_pre_node = pre_node.previous_node
+    while node != start_node:
+        if pre_pre_node:
+            if pre_pre_node.links[pre_node].name != pre_node.links[node].name:
+                print("^  {0}".format(pre_node.links[node].name))
+                print(pre_node.name)
+                node = pre_node
+                pre_node = pre_pre_node
+                pre_pre_node = pre_pre_node.previous_node
+                is_last_different = True
+            else:
+                node = pre_node
+                pre_node = pre_pre_node
+                pre_pre_node = pre_pre_node.previous_node
+                is_last_different = False
+        else: #last pattern
+            print("^  {0}".format(pre_node.links[node].name))
+            print(pre_node.name)
+            node = pre_node
