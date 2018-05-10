@@ -52,12 +52,16 @@ def print_result(start_node,goal_node):
             node = pre_node
 
 def draw_result(start_node,goal_node):
+    x = 0
     node = goal_node
     fill(255,0,0)
     ellipse(node.coordinate[1],800-node.coordinate[0],40,40)
     pre_node = goal_node.previous_node
     while pre_node:
+        x += 1
         fill(255,0,0)
         ellipse(pre_node.coordinate[1],800-pre_node.coordinate[0],40,40)
+        fill(0)
+        text(x,pre_node.coordinate[1],800-pre_node.coordinate[0])
         node = pre_node
         pre_node = pre_node.previous_node
