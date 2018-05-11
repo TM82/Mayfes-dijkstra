@@ -5,7 +5,7 @@ from display import ap_co
 def make_stations():    
     table_cn = loadTable('connection2.csv')
     table_cr = loadTable('coordinate.csv')
-    station_number = table_cn.getRowCount() - 1
+    station_number = table_cr.getRowCount() - 1
     stations = []
     for i in range(station_number):
         station = Station(table_cn.getString(i+1,0))
@@ -26,7 +26,6 @@ def make_stations():
 def load_cn(table_cn,i,j):
     data = table_cn.getString(i,j)
     data = map(lambda x:int(x),data[1:-1].split(","))
-    print(data)
     return data
     
 def make_direct_node(decided_node,unsearched_node): 

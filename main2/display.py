@@ -52,19 +52,23 @@ def print_result(start_node,goal_node):
             node = pre_node
 
 def draw_result(start_node,goal_node):
-    x = 0
+    x = -1
     node = goal_node
-    fill(255,0,0)
-    ellipse(ap_co(node)[0],ap_co(node)[1],40,40)
-    pre_node = goal_node.previous_node
-    while pre_node:
+    while node:
         x += 1
+        node = node.previous_node
+    node = goal_node
+    pre_node = node.previous_node
+    while pre_node:
         fill(255,0,0)
-        ellipse(ap_co(pre_node)[0],ap_co(pre_node)[1],40,40)
+        ellipse(ap_co(node)[0],ap_co(node)[1],40,40)
         fill(0)
-        text(x,ap_co(pre_node)[0],ap_co(pre_node)[1])
+        text(x,ap_co(node)[0],ap_co(node)[1])
         node = pre_node
         pre_node = pre_node.previous_node
+        x -= 1
+    fill(255,0,0)
+    ellipse(ap_co(node)[0],ap_co(node)[1],40,40)
         
 def ap_co(node): #appropriate coordinate
-    return node.coordinate[1]*1.6+60 ,800-node.coordinate[0]*0.6-475
+    return node.coordinate[1]*1.4+150 ,800-node.coordinate[0]*0.6-475
