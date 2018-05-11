@@ -1,26 +1,34 @@
 from station import Station
 from rail import Rail
+from display import ap_co
 
-def make_stations():
-        table_cn = loadTable('connection.csv')
-        table_cr = loadTable('coordinate.csv')
-        station_number = table_cn.getRowCount() - 1
-        stations = []
-        for i in range(station_number):
-            station = Station(table_cn.getString(i+1,0))
-            station.coordinate = [(table_cr.getFloat(i+1,1))*0.6+480,(table_cr.getFloat(i+1,2))*1.5+150]
-            stations.append(station)
-        
-        for i in range(station_number):
-            for j in range(station_number):
-                for k,value in Rail.rails.items():
-                    if table_cn.getInt(i+1,j+1) == 0:
-                        pass
-                    elif table_cn.getInt(i+1,j+1) == k:
-                        rail = Rail(value,stations[i],stations[j])
-                        stations[i].links[stations[j]] = rail    
-        return stations
+def make_stations():    
+    table_cn = loadTable('connection2.csv')
+    table_cr = loadTable('coordinate.csv')
+    station_number = table_cn.getRowCount() - 1
+    stations = []
+    for i in range(station_number):
+        station = Station(table_cn.getString(i+1,0))
+        station.coordinate = [(table_cr.getFloat(i+1,1)),(table_cr.getFloat(i+1,2))]
+        stations.append(station)
+    
+    for i in range(station_number):
+        for j in range(station_number):
+            try:
+                rail_name = Rail.rails[load_cn(table_cn,i+1,j+1)[0]]
+            except KeyError:
+                continue
+            rail_time = load_cn(table_cn,i+1,j+1)[1]
+            rail = Rail(rail_name,stations[i],stations[j],rail_time)
+            stations[i].links[stations[j]] = rail    
+    return stations
 
+def load_cn(table_cn,i,j):
+    data = table_cn.getString(i,j)
+    data = map(lambda x:int(x),data[1:-1].split(","))
+    print(data)
+    return data
+    
 def make_direct_node(decided_node,unsearched_node): 
     direct_node = []
     for node in decided_node:
@@ -28,13 +36,13 @@ def make_direct_node(decided_node,unsearched_node):
             if linked_node in unsearched_node:
                 stroke(0,255,0)
                 strokeWeight(3)
-                line(node.coordinate[1],800-node.coordinate[0],linked_node.coordinate[1],800-linked_node.coordinate[0])
+                line(ap_co(node)[0],ap_co(node)[1],ap_co(linked_node)[0],ap_co(linked_node)[1])
                 linked_node = relabel(node,linked_node)
                 linked_node.previous_node = node
                 direct_node.append(linked_node)
                 stroke(0,0,0)
                 strokeWeight(3)
-                line(node.coordinate[1],800-node.coordinate[0],linked_node.coordinate[1],800-linked_node.coordinate[0])
+                line(ap_co(node)[0],ap_co(node)[1],ap_co(linked_node)[0],ap_co(linked_node)[1])
     
     return direct_node
 
