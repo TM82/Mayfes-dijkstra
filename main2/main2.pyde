@@ -14,6 +14,8 @@ def setup():
     global decided_node,unsearched_node
     decided_node = []
     unsearched_node = make_stations()
+    for i in unsearched_node:
+        print(i.name)
     size(1500,800)
     background(255)
     draw_rails(unsearched_node)
