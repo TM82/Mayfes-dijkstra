@@ -1,28 +1,38 @@
+from light import createLight
+img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
+
 def draw_rails(unsearched_node):
     for node in unsearched_node:
         for linked_node,rail in node.links.items():
-            stroke(0,0,0)
+            stroke(0,255,0)
             strokeWeight(1)
             line(ap_co(node)[0],ap_co(node)[1],ap_co(linked_node)[0],ap_co(linked_node)[1])
             x = (ap_co(node)[0]+ap_co(linked_node)[0])/2
             y = (ap_co(node)[1]+ap_co(linked_node)[1])/2
-            fill(0)
+            fill(255)
             text(rail.distance,x,y)
 
 def draw_stations(unsearched_node):
     for node in unsearched_node:
-        fill(255,0,0)
-        ellipse(ap_co(node)[0],ap_co(node)[1],40,40)
-        fill(0)
+        #fill(0,255,0)
+        #ellipse(ap_co(node)[0],ap_co(node)[1],40,40)
+        image(img,ap_co(node)[0]-50,ap_co(node)[1]-50);
+        fill(255,255,255)
         text(unsearched_node.index(node),ap_co(node)[0],ap_co(node)[1])
+        fill(255,255,255)
         text(node.name,ap_co(node)[0]+20,ap_co(node)[1])
 
 def update_draw_stations(decided_node):
     for node in decided_node:
-        fill(0,255,0)
-        ellipse(ap_co(node)[0],ap_co(node)[1],40,40)
-        # fill(0)
-        # text(node.name,node.coordinate[1]+20,800-node.coordinate[0])
+        noStroke()
+        #fill(0,255,0)
+        #ellipse(ap_co(node)[0],ap_co(node)[1],40,40)
+        image(img,ap_co(node)[0]-50,ap_co(node)[1]-50);
+        fill(0,0,0)
+        text(decided_node.index(node),ap_co(node)[0],ap_co(node)[1])
+        fill(255,255,255)
+        text(node.name,ap_co(node)[0]+20,ap_co(node)[1])
+
         
 def print_result(start_node,goal_node):
     print('----------------')
@@ -61,14 +71,14 @@ def draw_result(start_node,goal_node):
     pre_node = node.previous_node
     while pre_node:
         fill(255,0,0)
-        ellipse(ap_co(node)[0],ap_co(node)[1],40,40)
+        ellipse(ap_co(node)[0],ap_co(node)[1],42,42)
         fill(0)
         text(x,ap_co(node)[0],ap_co(node)[1])
         node = pre_node
         pre_node = pre_node.previous_node
         x -= 1
     fill(255,0,0)
-    ellipse(ap_co(node)[0],ap_co(node)[1],40,40)
+    ellipse(ap_co(node)[0],ap_co(node)[1],42,42)
         
 def ap_co(node): #appropriate coordinate
     return node.coordinate[1]*1.4+150 ,800-node.coordinate[0]*0.6-475

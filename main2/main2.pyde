@@ -2,27 +2,35 @@ from algorithm import *
 from node import Node
 from rail import Rail
 from display import *
-
+from light import createLight
 
 start_node,goal_node,decided_node,unsearched_node = None,None,None,None
 num = [str(i) for i in range(10)]
 input = []
 is_start = False
 is_goal = False
+img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
 
 def setup():
+    
+    blendMode(ADD);
     global decided_node,unsearched_node
     decided_node = []
     unsearched_node = make_stations()
     for i in unsearched_node:
         print(i.name)
     size(1500,800)
-    background(255)
+    frameRate(10)
+    background(0)
     draw_rails(unsearched_node)
     draw_stations(unsearched_node)
+    #img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
+    #image(img, mouseX, mouseY);
     print('Enter start station number')
 
 def draw():
+    #image(img, mouseX, mouseY);
+    
     global decided_node,unsearched_node,is_start,is_goal
     if is_start and is_goal:
         direct_node = make_direct_node(decided_node,unsearched_node)
@@ -79,4 +87,6 @@ def keyPressed():
                 print()
         else:
             pass
-            # print('{} is not number'.format(key))
+            # print('{} is not number'.format(key))            
+def mousePressed():
+    img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
