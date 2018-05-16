@@ -4,7 +4,7 @@ img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
 def draw_rails(unsearched_node):
     for node in unsearched_node:
         for linked_node,rail in node.links.items():
-            stroke(0,255,0)
+            stroke(rail.rgb[0],rail.rgb[1],rail.rgb[2])
             strokeWeight(1)
             line(ap_co(node)[0],ap_co(node)[1],ap_co(linked_node)[0],ap_co(linked_node)[1])
             x = (ap_co(node)[0]+ap_co(linked_node)[0])/2
