@@ -39,8 +39,8 @@ def make_direct_node(decided_node,unsearched_node):
                 linked_node = relabel(node,linked_node)
                 linked_node.previous_node = node
                 direct_node.append(linked_node)
-                stroke(255,255,255)
-                strokeWeight(4)
+                stroke(150)
+                strokeWeight(2)
                 line(ap_co(node)[0],ap_co(node)[1],ap_co(linked_node)[0],ap_co(linked_node)[1])
     
     return direct_node
