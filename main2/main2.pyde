@@ -12,12 +12,12 @@ is_goal = False
 img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
 
 def setup():
-    
     blendMode(ADD);
     global decided_node,unsearched_node
     decided_node = []
     unsearched_node = make_stations()
-    size(1500,800)
+    # size(1500,800)
+    fullScreen()
     frameRate(10)
     background(0)
     draw_rails(unsearched_node)

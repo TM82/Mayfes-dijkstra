@@ -81,4 +81,4 @@ def draw_result(start_node,goal_node):
     ellipse(ap_co(node)[0],ap_co(node)[1],42,42)
         
 def ap_co(node): #appropriate coordinate
-    return node.coordinate[1]*1.4+150 ,800-node.coordinate[0]*0.6-475
+    return node.coordinate[1]*1.9+150 ,800-node.coordinate[0]-300
