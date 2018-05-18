@@ -50,6 +50,7 @@ def relabel(node,linked_node):
         pre_prelabel = node.label + linked_node.links[node].distance
         if pre_prelabel < linked_node.prelabel:
             linked_node.prelabel = pre_prelabel
+            linked_node.previous_node = node
         return linked_node
     except:
         print(node.name)
@@ -59,6 +60,7 @@ def get_min(direct_node,decided_node,unsearched_node):
     min_node = sorted(direct_node,key=lambda x: x.prelabel)[0]
     min_node.is_ok = True
     min_node.label = min_node.prelabel
+    print(min_node.previous_node.name,min_node.name,min_node.label)
     decided_node.append(min_node)
     unsearched_node.remove(min_node)
     

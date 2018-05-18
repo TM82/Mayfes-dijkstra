@@ -39,8 +39,6 @@ def draw():
             draw_rails_dark(decided_node)
             update_draw_stations(decided_node)
             
-            delay(2000)
-            
             print_result(start_node,goal_node)
             draw_result(start_node,goal_node)
             draw_result_line(start_node,goal_node)
