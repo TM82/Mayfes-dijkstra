@@ -1,6 +1,6 @@
 from light import createLight
-#img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
-img = createLight(0.3, 0.3, 0.7)
+img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
+#img = createLight(0.3, 0.3, 0.7)
 imageside = 200
 
 
