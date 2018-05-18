@@ -1,5 +1,5 @@
 def createLight(rPower, gPower, bPower):
-  side = 100
+  side = 200
   center = side / 2.0
   img = createImage(side, side, RGB)
   

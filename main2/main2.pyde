@@ -9,10 +9,12 @@ num = [str(i) for i in range(10)]
 input = []
 is_start = False
 is_goal = False
-img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
+#img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
+img = createLight(0, 0.5, 0.5)
 
 def setup():
-    blendMode(ADD);
+
+    blendMode(SCREEN);
     global decided_node,unsearched_node
     decided_node = []
     unsearched_node = make_stations()
@@ -22,12 +24,10 @@ def setup():
     background(0)
     draw_rails(unsearched_node)
     draw_stations(unsearched_node)
-    #img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
-    #image(img, mouseX, mouseY);
+    
     print('Enter start station number')
 
 def draw():
-    #image(img, mouseX, mouseY);
     
     global decided_node,unsearched_node,is_start,is_goal
     if is_start and is_goal:
@@ -35,8 +35,15 @@ def draw():
         decided_node,unsearched_node = get_min(direct_node,decided_node,unsearched_node)
         update_draw_stations(decided_node)
         if not unsearched_node:
+            background(0)
+            draw_rails_dark(decided_node)
+            update_draw_stations(decided_node)
+            
+            delay(2000)
+            
             print_result(start_node,goal_node)
             draw_result(start_node,goal_node)
+            draw_result_line(start_node,goal_node)
             is_start,is_goal = False,False
     
 
@@ -86,5 +93,6 @@ def keyPressed():
         else:
             pass
             # print('{} is not number'.format(key))            
+
 def mousePressed():
     img = createLight(random(0.5, 0.8), random(0.5, 0.8), random(0.5, 0.8))
