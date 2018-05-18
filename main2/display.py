@@ -114,8 +114,9 @@ def draw_result_line(start_node,goal_node):
     node = goal_node
     pre_node = node.previous_node
     while pre_node:
-        stroke(100,0,0)
-        strokeWeight(3)
+        rgb = node.links[node.previous_node].rgb
+        stroke(rgb[0],rgb[1],rgb[2])
+        strokeWeight(6)
         line(ap_co(pre_node)[0],ap_co(pre_node)[1],ap_co(node)[0],ap_co(node)[1])
         node = pre_node
         pre_node = pre_node.previous_node

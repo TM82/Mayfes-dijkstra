@@ -37,7 +37,6 @@ def make_direct_node(decided_node,unsearched_node):
                 strokeWeight(3)
                 line(ap_co(node)[0],ap_co(node)[1],ap_co(linked_node)[0],ap_co(linked_node)[1])
                 linked_node = relabel(node,linked_node)
-                linked_node.previous_node = node
                 direct_node.append(linked_node)
                 stroke(150)
                 strokeWeight(2)
@@ -46,16 +45,12 @@ def make_direct_node(decided_node,unsearched_node):
     return direct_node
 
 def relabel(node,linked_node):
-    try:
-        pre_prelabel = node.label + linked_node.links[node].distance
-        if pre_prelabel < linked_node.prelabel:
-            linked_node.prelabel = pre_prelabel
-            linked_node.previous_node = node
-        return linked_node
-    except:
-        print(node.name)
-        print(linked_node.name)
-        
+    pre_prelabel = node.label + linked_node.links[node].distance
+    if pre_prelabel < linked_node.prelabel:
+        linked_node.prelabel = pre_prelabel
+        linked_node.previous_node = node
+    return linked_node
+    
 def get_min(direct_node,decided_node,unsearched_node):  
     min_node = sorted(direct_node,key=lambda x: x.prelabel)[0]
     min_node.is_ok = True
